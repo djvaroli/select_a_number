@@ -12,6 +12,7 @@ func handleRequests(port string) {
 	muxRouter := mux.NewRouter().StrictSlash(true)
 	muxRouter.HandleFunc("/", Home)
 	muxRouter.HandleFunc("/health", HealthCheck)
+	muxRouter.HandleFunc("/es_health", EsCheck)
 	muxRouter.HandleFunc("/submit_data", SubmitData).Methods("POST")
 	log.Fatal(http.ListenAndServe(port, muxRouter))
 }

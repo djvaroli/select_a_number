@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -11,6 +12,16 @@ import (
 func Home(w http.ResponseWriter, r *http.Request) {
 	response := homeResponse{"Hello World", time.Now()}
 	_ = json.NewEncoder(w).Encode(response)
+}
+
+func EsCheck(w http.ResponseWriter, r *http.Request) {
+	es := GetEsClient()
+	res, err := es.Info()
+	if err != nil {
+		log.Fatalf("Error getting response: %s", err)
+	}
+	fmt.Println(res)
+	defer res.Body.Close()
 }
 
 
