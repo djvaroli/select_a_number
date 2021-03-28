@@ -14,8 +14,8 @@ type applicationHealthResponse struct {
 	NumFailures int32 `json:"NumFailures"`
 }
 
-type userNumberAndInfoRequest struct {
-	Number int16 `json:"Number"`
+type SubmittedUserInfo struct {
+	Number int16 `json:"Number"` // is always a number between 0 and 10
 	Age int16 `json:"Age"`
 	Nationality string `json:"Nationality"`
 	Gender string `json:"Gender"`

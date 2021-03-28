@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"time"
 )
@@ -22,5 +22,17 @@ func HealthCheck(w http.ResponseWriter, r *http.Request) {
 
 func SubmitData(w http.ResponseWriter, r *http.Request) {
 	reqBody, _ := ioutil.ReadAll(r.Body)
-	_, _ = fmt.Fprintf(w, "%+v", string(reqBody))
+
+	var userInfo SubmittedUserInfo
+	unmarshalErr := json.Unmarshal(reqBody, &userInfo)
+
+	if unmarshalErr != nil {
+		log.Printf("error decoding response: %v", unmarshalErr)
+		if e, ok := unmarshalErr.(*json.SyntaxError); ok {
+			log.Printf("syntax error at byte offset %d", e.Offset)
+		}
+		log.Printf("request body: %q", reqBody)
+	}
+
+	_ = json.NewEncoder(w).Encode(userInfo)
 }
