@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/elastic/go-elasticsearch/v7/esutil"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -45,5 +46,8 @@ func SubmitData(w http.ResponseWriter, r *http.Request) {
 		log.Printf("request body: %q", reqBody)
 	}
 
-	_ = json.NewEncoder(w).Encode(userInfo)
+	// store the data in ElasticSearch
+	es := GetEsClient()
+	res, _ := es.Index("test-index", esutil.NewJSONReader(&userInfo))
+	fmt.Println(res)
 }

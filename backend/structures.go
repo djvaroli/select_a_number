@@ -21,4 +21,5 @@ type SubmittedUserInfo struct {
 	Nationality string `json:"Nationality"`
 	Gender string `json:"Gender"`
 	DominantHand string `json:"DominantHand"`
+	Timestamp string `json:"timestamp"`
 }
