@@ -1,8 +1,8 @@
 <template>
     <section>
-        <b-steps type="is-success">
-            <b-step-item label="Pick a Number" icon="tag">
-                <div class="flex-center-wrapper">
+        <b-steps type="is-primary" mobile-mode="minimalist">
+            <b-step-item label="Pick a Number" step="1">
+                <div class="flex-content-center-wrapper text-left">
                     <div class="step-text-prompt box">
                         Here's the deal. All you have to do for this task is pick a number. You can pick any number
                         starting at 1 and ending at 10. Simple!<br><br>
@@ -11,9 +11,9 @@
                     </div>
                 </div>
             </b-step-item>
-            <b-step-item label="Some Info" icon="account">
-                <div class="flex-center-wrapper">
-                    <div class="width-300">
+            <b-step-item label="Some Info" step="2">
+                <div class="flex-content-center-wrapper">
+                    <div class="text-left box stretch-max-500">
                         <b-field label="Age">
                             <b-input v-model="age"
                                      placeholder="Your age"
@@ -25,9 +25,9 @@
                             </b-input>
                         </b-field>
 
-                        <b-field label="Nationality">
+                        <b-field label="Country" required>
                             <b-input v-model="nationality"
-                                     placeholder="city you call home..."
+                                     placeholder="place you call home..."
                                      type="text"
                             >
                             </b-input>
@@ -51,42 +51,49 @@
                     </div>
                 </div>
             </b-step-item>
-            <b-step-item label="Submit Your Choice" icon="create">
-                <div class="flex-center-wrapper">
-                    <div class="step-text-prompt">
-                        You made it! Time to click on the box that corresponds to the number you chose before!
-                    </div>
-                    <div class="container is-desktop">
-                        <div class="number-options-board tile is-ancestor">
-                            <number-option-box v-for="(item, i) in numbers" :key="i" :number="item">
-                            </number-option-box>
-                        </div>
+            <b-step-item label="Submit Your Choice" step="3">
+                <div class="flex-content-center-wrapper">
+                    <div class="text-left box stretch-max-500">
+                        <b-field label="Your number">
+                            <b-input v-model="numberChoice"
+                                     placeholder="That number you wrote down..."
+                                     type="number"
+                                     icon-pack="fas"
+                                     icon="user-alt"
+                            >
+                            </b-input>
+                        </b-field>
                     </div>
                 </div>
             </b-step-item>
+            <b-step-item label="Done!" step="4" type="is-success">
+                <div class="flex-content-center-wrapper">
+                    <b-button type="is-success" size="is-large" class="button-box" outlined>Submit</b-button>
+                </div>
+            </b-step-item>
 
-            <template #navigation="{previous, next}">
-                <b-button class="step-navigation-button"
-                        v-if="showBackButton"
-                        outlined
-                        type="is-danger"
-                        icon-pack="fas"
-                        icon-right="backward"
-                        :disabled="previous.disabled"
-                        @click.prevent="previous.action">
-                    Go Back
-                </b-button>
-                <b-button class="step-navigation-button"
-                        outlined
-                        type="is-primary"
-                        icon-pack="fas"
-                        icon-right="forward"
-                        :disabled="next.disabled"
-                        @click="showBackButton=true"
-                        @click.prevent="next.action">
-                    Continue
-                </b-button>
-            </template>
+<!--            <template #navigation="{previous, next}">-->
+<!--                <b-button class="step-navigation-button"-->
+<!--                        v-if="showBackButton"-->
+<!--                        outlined-->
+<!--                        type="is-danger"-->
+<!--                        icon-pack="fas"-->
+<!--                        icon-right="backward"-->
+<!--                        :disabled="previous.disabled"-->
+<!--                        @click.prevent="previous.action">-->
+<!--                    Go Back-->
+<!--                </b-button>-->
+<!--                <b-button class="step-navigation-button"-->
+<!--                        outlined-->
+<!--                        type="is-primary"-->
+<!--                        icon-pack="fas"-->
+<!--                        icon-right="forward"-->
+<!--                        :disabled="next.disabled"-->
+<!--                        @click="showBackButton=true"-->
+<!--                        @click.prevent="next.action">-->
+<!--                    Continue-->
+<!--                </b-button>-->
+<!--            </template>-->
         </b-steps>
     </section>
 
@@ -94,12 +101,12 @@
 </template>
 
 <script>
-    import NumberOptionBox from "./NumberOptionBox";
+    // import NumberOptionBox from "./NumberOptionBox";
 
     export default {
         name: "SelectNumberBoard",
         components: {
-            "number-option-box": NumberOptionBox
+            // "number-option-box": NumberOptionBox
         },
         data () {
             return {
@@ -112,26 +119,51 @@
 
 <style scoped lang="scss">
 
-    .width-300 {
-        max-width: 300px;
-    }
     .number-options-board {
         display: flex;
         flex-wrap: wrap;
     }
 
-    .flex-center-wrapper{
+    .text-left {
+        text-align: left;
+    }
+
+    .text-right {
+        text-align: right
+    }
+
+    .margin-3rem {
+        margin: 3rem;
+    }
+
+    .max-width-500 {
+        max-width: 500px;
+    }
+
+    .stretch-max-500 {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .flex-content-center-wrapper{
         display: flex;
+        margin: 3rem 0;
         justify-content: center;
-        text-align: center;
         .step-text-prompt {
-            max-width: 400px;
+            width: 100%;
+            max-width: 500px;
         }
     }
 
     .step-navigation-button {
         margin: 10px;
     }
+
+    .button-box {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+
 
 
 

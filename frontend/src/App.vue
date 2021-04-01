@@ -2,7 +2,9 @@
   <div id="app">
     <Header></Header>
     <PageBanner></PageBanner>
+    <br>
     <SelectNumberBoard></SelectNumberBoard>
+    <br>
     <Footer></Footer>
   </div>
 </template>

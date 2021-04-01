@@ -1,5 +1,5 @@
 <template>
-    <section class="hero is-primary">
+    <section class="hero is-medium is-link">
         <div class="hero-body">
             <p class="title">
                 Select A Number
